@@ -26,5 +26,5 @@ export function SimplePodcast(req, res, next)
     let fileName = '../data/data' + page + '.json';
     let data = fs.readFileSync(path.resolve(__dirname, fileName));
     let sendData= JSON.parse(data.toString());
-    res.render('index', { title: 'Page ' + page, podcasts: sendData });
+    res.render('index', { title: 'Page', podcasts: sendData });
 }

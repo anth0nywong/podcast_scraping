@@ -5,10 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%=title%></h1>
+    <h1>My scrapping app</h1>
     <p>Welcome to my scrapping app, which scrap the podcasts from software engineering daily.</p>
     <% for (var i = 0; i < podcasts.length; i ++) { %>
-      <h2><%=podcasts[i].title%></h2>
+      <h2><%=podcasts[i].title[0]%></h2>
       <div>
       <audio controls>
         <source type="audio/mpeg" src="<%=podcasts[i].link%>">

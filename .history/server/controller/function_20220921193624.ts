@@ -12,6 +12,7 @@ export function RetrieveData(req, res, next)
     let data = fs.readFileSync(path.resolve(__dirname, fileName));
     
     let sendData= JSON.parse(data.toString())
+    //
     res.json({success: true, message: 'Podcast Retrieved Successfully', data: sendData});
 }
 
@@ -25,6 +26,5 @@ export function SimplePodcast(req, res, next)
     let page = req.params.page;
     let fileName = '../data/data' + page + '.json';
     let data = fs.readFileSync(path.resolve(__dirname, fileName));
-    let sendData= JSON.parse(data.toString());
-    res.render('index', { title: 'Page ' + page, podcasts: sendData });
+    res.render('index', { title: 'Express', podcasts: data });
 }

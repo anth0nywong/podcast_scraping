@@ -28,7 +28,6 @@ subprocess.stderr.on('data', (data) => {
 subprocess.on('close', () => {
     console.log("Closed");
 });
-
 function normalizePort(val) {
     let port = parseInt(val, 10);
     if (isNaN(port)) {

@@ -1,0 +1,3 @@
+Get "/api/(page_number)" to retrieve data of title and links of each padcast
+
+For a minial User Interface, navigate to /page/(page_number)
