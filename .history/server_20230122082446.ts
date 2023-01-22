@@ -8,6 +8,10 @@ import app from './server/config/app.js';
 import debug from 'debug';
 import http from 'http';
 
+import {spawn} from 'child_process';
+import path from 'path';
+
+
 /**
  * Get port from environment and store in Express.
  */
@@ -29,12 +33,38 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+function runScript()
+  {
+    return spawn('python', [path.join(__dirname, './server/controller/scraping.py')])
+  }
+
+try {
+  const subprocess = runScript();
+} catch (error) {
+  console.error(error);
+  // Expected output: ReferenceError: nonExistentFunction is not defined
+  // (Note: the exact output may be browser-dependent)
+}
+
+
+
+
+
+subprocess.stdout.on('data', (data) => {
+  console.log(`data:${data}`);
+});
+subprocess.stderr.on('data', (data) => {
+  console.log(`error:${data}`);
+});
+subprocess.on('close', () => {
+  console.log("Closed");
+});
 /**
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -45,7 +75,6 @@ function normalizePort(val) {
     // port number
     return port;
   }
-
   return false;
 }
 
@@ -82,9 +111,10 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr : any = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  
 }

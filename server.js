@@ -18,16 +18,21 @@ server.on('listening', onListening);
 function runScript() {
     return (0, child_process_1.spawn)('python', [path_1.default.join(__dirname, './server/controller/scraping.py')]);
 }
-const subprocess = runScript();
-subprocess.stdout.on('data', (data) => {
-    console.log(`data:${data}`);
-});
-subprocess.stderr.on('data', (data) => {
-    console.log(`error:${data}`);
-});
-subprocess.on('close', () => {
-    console.log("Closed");
-});
+try {
+    const subprocess = runScript();
+    subprocess.stdout.on('data', (data) => {
+        console.log(`data:${data}`);
+    });
+    subprocess.stderr.on('data', (data) => {
+        console.log(`error:${data}`);
+    });
+    subprocess.on('close', () => {
+        console.log("Closed");
+    });
+}
+catch (error) {
+    console.error(error);
+}
 function normalizePort(val) {
     let port = parseInt(val, 10);
     if (isNaN(port)) {
