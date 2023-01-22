@@ -23,7 +23,7 @@ function SimplePodcast(req, res, next) {
     let fileName = '../data/data' + page + '.json';
     let data = fs_1.default.readFileSync(path_1.default.resolve(__dirname, fileName));
     let sendData = JSON.parse(data.toString());
-    res.render('index', { title: 'Page ' + page, podcasts: sendData });
+    res.render('index', { title: 'Page ' + page, podcasts: sendData, page: page });
 }
 exports.SimplePodcast = SimplePodcast;
 //# sourceMappingURL=function.js.map
