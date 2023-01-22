@@ -1,5 +1,15 @@
 ## Podcast Scraping
 
+## Tech
+
+##### Python/Beautiful Soup
+
+Created Python script to scrap audio links and podcast title from destination website. The data is then exported in JSON format.
+
+##### ExpressJS/JavaScript
+
+Running on server side to keep the the data file updated.
+
 ## How to use:
 
 After pulling, enter "yarn install" on terminal to install the necessary libraries.
