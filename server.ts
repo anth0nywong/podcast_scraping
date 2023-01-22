@@ -34,30 +34,24 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 function runScript()
-  {
-    return spawn('python', [path.join(__dirname, './server/controller/scraping.py')])
-  }
-
-try {
-  const subprocess = runScript();
-
-  subprocess.stdout.on('data', (data) => {
-    console.log(`data:${data}`);
-  });
-  subprocess.stderr.on('data', (data) => {
-    console.log(`error:${data}`);
-  });
-  subprocess.on('close', () => {
-    console.log("Closed");
-  });
-  /**
-   * Normalize a port into a number, string, or false.
-   */
-} catch (error) {
-  console.error(error);
-  // Expected output: ReferenceError: nonExistentFunction is not defined
-  // (Note: the exact output may be browser-dependent)
+{
+  return spawn('python', ['./server/controller/scraping.py'])
 }
+
+const subprocess = runScript();
+
+subprocess.stdout.on('data', (data) => {
+  console.log(`data:${data}`);
+});
+subprocess.stderr.on('data', (data) => {
+  console.log(`error:${data}`);
+});
+subprocess.on('close', () => {
+  console.log("Closed");
+});
+/**
+ * Normalize a port into a number, string, or false.
+ */
 
 function normalizePort(val) {
   let port = parseInt(val, 10);

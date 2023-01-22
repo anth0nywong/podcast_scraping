@@ -8,7 +8,6 @@ const app_js_1 = __importDefault(require("./server/config/app.js"));
 const debug_1 = __importDefault(require("debug"));
 const http_1 = __importDefault(require("http"));
 const child_process_1 = require("child_process");
-const path_1 = __importDefault(require("path"));
 var port = normalizePort(process.env.PORT || '3000');
 app_js_1.default.set('port', port);
 var server = http_1.default.createServer(app_js_1.default);
@@ -16,23 +15,18 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 function runScript() {
-    return (0, child_process_1.spawn)('python', [path_1.default.join(__dirname, './server/controller/scraping.py')]);
+    return (0, child_process_1.spawn)('python', ['./server/controller/scraping.py']);
 }
-try {
-    const subprocess = runScript();
-    subprocess.stdout.on('data', (data) => {
-        console.log(`data:${data}`);
-    });
-    subprocess.stderr.on('data', (data) => {
-        console.log(`error:${data}`);
-    });
-    subprocess.on('close', () => {
-        console.log("Closed");
-    });
-}
-catch (error) {
-    console.error(error);
-}
+const subprocess = runScript();
+subprocess.stdout.on('data', (data) => {
+    console.log(`data:${data}`);
+});
+subprocess.stderr.on('data', (data) => {
+    console.log(`error:${data}`);
+});
+subprocess.on('close', () => {
+    console.log("Closed");
+});
 function normalizePort(val) {
     let port = parseInt(val, 10);
     if (isNaN(port)) {
