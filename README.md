@@ -2,7 +2,7 @@
 
 ## Tech
 
-##### Python/Beautiful Soup
+##### Python/Beautiful Soup 5
 
 Created Python script to scrap audio links and podcast title from destination website. The data is then exported in JSON format.
 
